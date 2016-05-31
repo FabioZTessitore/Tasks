@@ -1,7 +1,22 @@
 <template name="Tasks">
-  <h2>Tasks for <strong>{{projectTitle}}</strong></h2>
+  <section class="tasks">
+    <section class="heading">
+      <h2><strong>{{projectTitle}}</strong></h2>
+      <h3>Tasks <button class="btn btn-warning delete_tasks_done"><span class="glyphicon glyphicon-trash"></span></button></h3>
+    </section>
 
-  <p>List of tasks here</p>
+    <ul class="list-group">
+      {{#each tasks}}
+        {{> taskItem}}
+      {{/each}}
 
-  <p>Form HERE</p>
+      <li class="list-group-item">
+        <form class="form-inline">
+          <div class="form-group">
+            <input type="text" class="form-control" id="newTask" name="newTask" placeholder="Add a Task">
+          </div>
+        </form>
+      </li>
+    </ul>
+  </section>
 </template>

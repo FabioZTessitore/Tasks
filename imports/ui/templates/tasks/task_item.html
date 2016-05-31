@@ -1,3 +1,13 @@
 <template name="taskItem">
-  <li class="list-group-item">{{title}}</li>
+  <li class="list-group-item task {{taskDone}}">
+    <form class="form-inline">
+      <div class="form-group">
+        <div class="checkbox">
+          <label class="{{done_strike}}">
+            <input type="checkbox" {{checked}} class="checkbox_task"> {{rank}}) {{title}} 
+          </label>
+        </div>
+      </div>
+    </form>
+  </li>
 </template>

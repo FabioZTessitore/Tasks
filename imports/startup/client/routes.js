@@ -8,13 +8,13 @@ import '../../ui/templates/tasks/tasks.js';
 FlowRouter.route('/', {
   name: 'home',
   action() {
-    BlazeLayout.render('MainLayout', { content: 'Splash' });
+    BlazeLayout.render('MainLayout', { content: 'splash' });
   },
 });
 
 FlowRouter.route('/projects/:id', {
   name: 'projects',
   action() {
-    BlazeLayout.render('MainLayout', { content: 'Tasks' });
+    BlazeLayout.render('MainLayout', { content: 'tasksList' });
   },
 });

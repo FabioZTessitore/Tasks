@@ -7,7 +7,9 @@ import './project_item.js';
 import './projects.html';
 
 Template.ProjectsList.onCreated(function() {
-  Meteor.subscribe('projects');
+  this.autorun(() => {
+    this.subscribe('projects');
+  });
 });
 
 Template.ProjectsList.helpers({
@@ -22,7 +24,17 @@ Template.ProjectsList.events({
 
     const title = event.target.title;
 
-    Projects.insert({ title: title.value });
+    Meteor.call('projects.insert', {
+      title: $.trim(title.value)
+    }, function(err, result) {
+      if (err) {
+        throw new Meteor.Error(err.reason);
+      }
+
+      if (result.exists) {
+        console.log("esiste gia' un progetto con questo nome");
+      }
+    });
 
     title.value = '';
   },

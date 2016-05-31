@@ -1,0 +1,19 @@
+.navbar {
+  border-radius: 0;
+}
+
+.projects-list h2 {
+  font-weight: normal;
+  color: rgb(100, 100, 100);
+}
+
+.projects-list li {
+  cursor: pointer;
+}
+
+.projects-list input {
+  box-shadow: none;
+  border: none;
+  border-bottom: 1px solid grey;
+  border-radius: 0;
+}

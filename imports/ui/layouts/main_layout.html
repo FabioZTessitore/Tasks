@@ -1,0 +1,14 @@
+<template name="MainLayout">
+  {{> header}}
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        {{> ProjectsList}}
+      </div>
+      <div class="col-md-9">
+        {{> Template.dynamic template=content}}
+      </div>
+    </div>
+  </div>
+</template>

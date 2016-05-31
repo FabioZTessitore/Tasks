@@ -1,0 +1,19 @@
+<template name="ProjectsList">
+  <div class="projects-list">
+  <h2>Projects</h2>
+
+  <ul class="list-group">
+    {{#each projects}}
+      {{> ProjectItem}}
+    {{/each}}
+
+    <li class="list-group-item">
+      <form class="form-inline">
+        <div class="form-group">
+          <input type="text" class="form-control" id="title" name="title" placeholder="Add A Project">
+        </div>
+      </form>
+    </li>
+  </ul>
+  </div>
+</template>

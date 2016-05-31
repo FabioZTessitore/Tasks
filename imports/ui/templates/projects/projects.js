@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 
 import { Projects } from '../../../api/projects/projects.js';
+import { Errors } from '../errors/errors_collection.js';
 
 import './project_item.js';
 import './projects.html';
@@ -32,7 +33,7 @@ Template.ProjectsList.events({
       }
 
       if (result.exists) {
-        console.log("esiste gia' un progetto con questo nome");
+        const eid = Errors.insert({ message: "esiste gia' un progetto con questo nome" });
       }
     });
 

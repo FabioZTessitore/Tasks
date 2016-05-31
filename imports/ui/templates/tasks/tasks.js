@@ -7,6 +7,14 @@ import { Tasks } from '../../../api/tasks/tasks.js';
 import './task_item.js';
 import './tasks.html';
 
+Template.tasksList.onCreated(function() {
+  this.projectID = () => FlowRouter.getParam('id');
+
+  this.autorun(() => {
+    this.subscribe('tasks', this.projectID());
+  });
+});
+
 Template.tasksList.helpers({
   projectTitle() {
     const projectID = FlowRouter.getParam('id');

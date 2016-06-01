@@ -2,6 +2,8 @@ import { Meteor } from 'meteor/meteor';
 
 import { Projects } from './projects.js';
 
+import { check } from 'meteor/check';
+
 Meteor.methods({
   "projects.insert": (projectAttributes) => {
     check(projectAttributes, {

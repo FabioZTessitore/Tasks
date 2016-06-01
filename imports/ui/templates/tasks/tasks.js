@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
@@ -57,9 +58,8 @@ Template.tasksList.events({
       rank = 1;
     }
 
-    Tasks.insert({
+    Meteor.call('tasks.insert', projectID, {
       title: task.value,
-      projectID,
       rank
     });
 

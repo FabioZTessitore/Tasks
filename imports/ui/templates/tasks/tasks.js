@@ -40,27 +40,8 @@ Template.tasksList.events({
     const projectID = FlowRouter.getParam('id');
     const task = event.target.newTask;
 
-    const lastTask = Tasks.findOne({
-      projectID
-    }, {
-      fields: {
-        rank: 1
-      },
-      sort: {
-        rank: -1
-      },
-      limit: 1
-    });
-    let rank;
-    if (lastTask) {
-      rank = lastTask.rank + 1;
-    } else {
-      rank = 1;
-    }
-
     Meteor.call('tasks.insert', projectID, {
       title: task.value,
-      rank
     });
 
     task.value = '';
@@ -71,17 +52,10 @@ Template.tasksList.events({
 
     const projectID = FlowRouter.getParam('id');
 
-    const task_to_remove = Tasks.find({
-      projectID,
-      done: true
-    }, {
-      fields: {
-        _id: 1
+    Meteor.call('tasks.deleteDone', projectID, (err) => {
+      if (err) {
+        console.log(err.reason);
       }
-    }).fetch();
-
-    _.each(task_to_remove, (task) => {
-      Tasks.remove(task._id);
     });
   }
 });

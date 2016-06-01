@@ -1,6 +1,5 @@
+import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
-
-import { Tasks } from '../../../api/tasks/tasks.js';
 
 import './task_item.html';
 
@@ -23,8 +22,12 @@ Template.taskItem.events({
     event.preventDefault();
 
     const taskID = this._id;
-    Tasks.update(taskID, {
-      $set: { done: !this.done }
+    const done = !this.done;
+
+    Meteor.call('tasks.toggleDone', taskID, done, (err) => {
+      if (err) {
+        console.log(err.reason);
+      }
     });
   },
 });

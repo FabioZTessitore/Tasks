@@ -24,6 +24,7 @@ Meteor.methods({
     const project = {
       title: projectAttributes.title,
       createdAt: new Date(),
+      owner: Meteor.userId(),
     };
     const _id = Projects.insert(project);
 
@@ -34,6 +35,11 @@ Meteor.methods({
 
   "projects.remove": (projectID) => {
     check(projectID, String);
+
+    const project = Projects.findOne(projectID);
+    if (project.owner!==Meteor.userId()) {
+      throw new Meteor.Error('not-authorized');
+    }
 
     Tasks.remove({ projectID });
     Projects.remove({ _id: projectID });

@@ -7,6 +7,7 @@
       {{> ProjectItem}}
     {{/each}}
 
+    {{#if currentUser}}
     <li class="list-group-item">
       <form class="form-inline">
         <div class="form-group">
@@ -14,6 +15,11 @@
         </div>
       </form>
     </li>
+    {{else}}
+    <li class="list-group-item">
+      <p>Effettua il Login per inserire progetti</p>
+    </li>
+    {{/if}}
   </ul>
   </div>
 </template>

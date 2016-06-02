@@ -1,3 +1,5 @@
 <template name="ProjectItem">
+  {{#if isOwner}}
   <li class="list-group-item {{active}} project-title">{{title}} <button class="btn btn-default btn-sm trash"><span class="glyphicon glyphicon-trash"></span></button></li>
+  {{/if}}
 </template>

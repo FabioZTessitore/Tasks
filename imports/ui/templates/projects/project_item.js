@@ -9,6 +9,15 @@ Template.ProjectItem.helpers({
   }
 });
 
+Template.ProjectItem.onRendered(function() {
+  const el = $(this.find('.project-title'));
+
+  el.addClass('animated rollIn');
+  Meteor.setTimeout(() => {
+    el.removeClass("animated rollIn");
+  }, 1500);
+});
+
 Template.ProjectItem.events({
   "click": function(event) {
     event.preventDefault();
@@ -23,6 +32,9 @@ Template.ProjectItem.events({
 
     const projectID = this._id;
 
-    Meteor.call('projects.remove', projectID);
+    $(event.target).closest('.project-title').addClass('animated hinge');
+    Meteor.setTimeout(() => {
+      Meteor.call('projects.remove', projectID);
+    }, 2000);
   },
 });

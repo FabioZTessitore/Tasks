@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 
 import { Projects } from './projects.js';
+import { Tasks } from '../tasks/tasks.js';
 
 import { check } from 'meteor/check';
 
@@ -29,5 +30,12 @@ Meteor.methods({
     return {
       _id
     };
-  }
+  },
+
+  "projects.remove": (projectID) => {
+    check(projectID, String);
+
+    Tasks.remove({ projectID });
+    Projects.remove({ _id: projectID });
+  },
 });

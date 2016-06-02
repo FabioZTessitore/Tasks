@@ -24,6 +24,14 @@
   border-radius: 0;
 }
 
+.project-title button {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  background-color: transparent;
+  border: none;
+}
+
 .done {
   text-decoration: line-through;
   color: grey;

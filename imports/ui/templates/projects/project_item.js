@@ -17,4 +17,12 @@ Template.ProjectItem.events({
 
     FlowRouter.go('/projects/'+projectID);
   },
+
+  "click .trash": function(event) {
+    event.preventDefault();
+
+    const projectID = this._id;
+
+    Meteor.call('projects.remove', projectID);
+  },
 });

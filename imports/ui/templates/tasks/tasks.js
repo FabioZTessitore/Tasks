@@ -16,6 +16,58 @@ Template.tasksList.onCreated(function() {
   });
 });
 
+Template.tasksList.onRendered(function() {
+  this.$('#tasks').sortable({
+    stop: (e, ui) => {
+      const el = ui.item.get(0);
+      const before = ui.item.prev().get(0);
+      const after = ui.item.next().get(0);
+
+      const b_el = Blaze.getData(el);
+      const oldRank = b_el.rank;
+
+      let newRank;
+
+      if (!before) {
+        newRank = 1;
+        Meteor.call('tasks.moveToFirst', oldRank);
+      } else if (!after) {
+        const b_before = Blaze.getData(before);
+        const b_el = Blaze.getData(el);
+
+        if (b_el.rank < b_before.rank) {
+          newRank = b_before.rank;
+          Meteor.call('tasks.moveToLast', oldRank);
+        }
+      } else {
+        const b_before = Blaze.getData(before);
+        newRank = b_before.rank;
+        let diff = newRank - oldRank;
+        let start = oldRank + 1;
+        let end = newRank;
+        let inc = -1;
+
+        if (diff < 0) {
+          newRank += 1;
+          diff += 1;
+          end = oldRank;
+          start = newRank;
+          inc = 1;
+        }
+
+        Meteor.call('tasks.moveBetween', start, end, inc);
+      }
+
+      Meteor.call('tasks.updateRank', b_el._id, newRank, (err) => {
+        if (err) {
+          console.log(err.reason);
+          return;
+        }
+      });
+    }
+  });
+});
+
 Template.tasksList.helpers({
   projectTitle() {
     const projectID = FlowRouter.getParam('id');
@@ -29,7 +81,7 @@ Template.tasksList.helpers({
   tasks() {
     const projectID = FlowRouter.getParam('id');
 
-    return Tasks.find({projectID});
+    return Tasks.find({projectID}, { $sort: { rank: 1 } });
   },
 });
 

@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 
 import { check } from 'meteor/check';
+import { Match } from 'meteor/check';
 
 import { Tasks } from './tasks.js';
 
@@ -70,5 +71,56 @@ Meteor.methods({
       Tasks.update(task._id, { $set: { rank: counter } });
       counter++;
     });
+  },
+
+  "tasks.moveToFirst": (oldRank) => {
+    check(oldRank, Match.Integer);
+
+    Tasks.update({
+      $and: [
+      { rank: { $gte: 1 } },
+      { rank: { $lt: oldRank } }
+      ]
+    }, {
+      $inc: { rank: 1 }
+    }, {
+      multi: true
+    });
+  },
+
+  "tasks.moveToLast": (oldRank) => {
+    check(oldRank, Match.Integer);
+
+    Tasks.update({
+      rank: { $gt: oldRank }
+    }, {
+      $inc: { rank: -1 }
+    }, {
+      multi: true
+    });
+  },
+
+  "tasks.moveBetween": (start, end, inc) => {
+    check(start, Match.Integer);
+    check(end, Match.Integer);
+    check(inc, Match.Integer);
+
+    Tasks.update({
+      $and: [
+      { rank: { $gte: start } },
+      { rank : { $lte: end } }
+      ]
+    }, {
+      $inc : { rank : inc }
+    }, {
+      multi: true
+    });
+  },
+
+  "tasks.updateRank": (taskId, newRank) => {
+    check(taskId, String);
+    check(newRank, Match.Integer);
+
+    Tasks.update({ _id: taskId }, { $set: { rank: newRank } });
   },
 });

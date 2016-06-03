@@ -83,6 +83,12 @@ Template.tasksList.helpers({
 
     return Tasks.find({projectID}, { $sort: { rank: 1 } });
   },
+
+  isOwner() {
+    const projectID = FlowRouter.getParam('id');
+    const project = Projects.findOne(projectID);
+    return project.owner===Meteor.userId();
+  },
 });
 
 Template.tasksList.events({

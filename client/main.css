@@ -2,6 +2,10 @@
   border-radius: 0;
 }
 
+.navbar-toggle {
+  padding: 15px;
+}
+
 .logo {
   position: relative;
   bottom: 7px;

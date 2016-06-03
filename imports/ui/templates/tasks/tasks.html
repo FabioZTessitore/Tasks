@@ -7,9 +7,11 @@
 
     <ul class="list-group">
       <div id="tasks">
-      {{#each tasks}}
-        {{> taskItem}}
-      {{/each}}
+        {{#if isOwner}}
+          {{#each tasks}}
+            {{> taskItem}}
+          {{/each}}
+        {{/if}}
       </div>
 
       <li class="list-group-item">

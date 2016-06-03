@@ -12,7 +12,8 @@ Meteor.methods({
     });
 
     const sameTitleProject = Projects.findOne({
-      title: projectAttributes.title
+      title: projectAttributes.title,
+      owner: this.userId,
     });
     if (sameTitleProject) {
       return {

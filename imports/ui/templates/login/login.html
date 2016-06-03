@@ -1,0 +1,23 @@
+<template name="login">
+  <div class="page-header">
+    <p class="text-center"><img src="/task_done.png" width="50px"></p>
+    <h4 class="text-center">Sign in to Task Manager</h4>
+  </div>
+
+  <form>
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" class="form-control" id="username" name="username" placeholder="username">
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" id="password" name="password" placeholder="password">
+    </div>
+    <input type="submit" class="btn btn-success btn-block" value="Login">
+  </form>
+
+  <br>
+  <div class="well">
+    <p>New to <strong>Task Manager</strong>? <a href="{{pathFor 'signup'}}">Create an account</a></p>
+  </div>
+</template>

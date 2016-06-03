@@ -14,6 +14,12 @@
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
+        {{#if currentUser}}
+        <li><a href="#"><button type="button" class="btn btn-default logout"><strong>Logout</strong></button></a></li>
+        {{else}}
+        <li><a href="#"><button type="button" class="btn btn-default"><strong>Login</strong></button></a></li>
+        <li><a href="{{pathFor 'signup'}}"><button type="button" class="btn btn-success"><strong>Sign up</strong></button></a></li>
+        {{/if}}
         <li><a href="#">{{> loginButtons}}</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->

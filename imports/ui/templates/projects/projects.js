@@ -33,7 +33,7 @@ Template.ProjectsList.events({
       }
 
       if (result.exists) {
-        const eid = Errors.insert({ message: "esiste gia' un progetto con questo nome" });
+        Errors.insert({ message: "esiste gia' un progetto con questo nome" });
       }
     });
 

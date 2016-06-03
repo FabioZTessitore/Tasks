@@ -1,0 +1,13 @@
+<template name="AccountsLayout">
+  {{> header}}
+
+  {{> errors}}
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-offset-3 col-md-6">
+        {{> Template.dynamic template=content}}
+      </div>
+    </div>
+  </div>
+</template>

@@ -9,7 +9,7 @@ Template.taskItem.helpers({
   },
 
   done_strike() {
-    return this.done ? 'done' : ''; 
+    return this.done ? 'done' : '';
   },
 
   checked() {

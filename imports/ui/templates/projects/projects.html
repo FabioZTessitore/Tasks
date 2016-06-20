@@ -9,11 +9,7 @@
 
     {{#if currentUser}}
     <li class="list-group-item">
-      <form class="form-inline">
-        <div class="form-group">
-          <input type="text" class="form-control" id="title" name="title" placeholder="Add A Project">
-        </div>
-      </form>
+        {{> quickForm collection=Projects id="projectInsertForm" buttonContent=false}}
     </li>
     {{/if}}
   </ul>

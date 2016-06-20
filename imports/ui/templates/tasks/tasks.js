@@ -9,11 +9,11 @@ import './task_item.js';
 import './tasks.html';
 
 Template.tasksList.onCreated(function() {
-  this.projectID = () => FlowRouter.getParam('id');
-
-  this.autorun(() => {
-    this.subscribe('tasks', this.projectID());
-  });
+    const self = this;
+    self.autorun(() => {
+        self.subscribe('tasks', FlowRouter.getParam('id'));
+        self.subscribe('projects');
+    });
 });
 
 Template.tasksList.onRendered(function() {
@@ -69,6 +69,10 @@ Template.tasksList.onRendered(function() {
 });
 
 Template.tasksList.helpers({
+    Tasks() {
+        return Tasks;
+    },
+
   projectTitle() {
     const projectID = FlowRouter.getParam('id');
     const project = Projects.findOne(projectID);
@@ -96,7 +100,7 @@ Template.tasksList.events({
     event.preventDefault();
 
     const projectID = FlowRouter.getParam('id');
-    const task = event.target.newTask;
+    const task = event.target.title;
 
     Meteor.call('tasks.insert', projectID, {
       title: task.value,

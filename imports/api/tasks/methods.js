@@ -7,10 +7,9 @@ import { Tasks } from './tasks.js';
 
 Meteor.methods({
   "tasks.insert": (projectID, taskAttributes) => {
-    check(projectID, String);
-    check(taskAttributes, {
-      title: String,
-    });
+      check(Meteor.userId(), String);
+
+      check(projectID, String);
 
     const lastTask = Tasks.findOne({
       projectID
@@ -30,12 +29,10 @@ Meteor.methods({
       rank = 1;
     }
 
-    const task = {
-      projectID,
-      title: taskAttributes.title,
-      rank,
-      createdAt: new Date(),
-    };
+    taskAttributes.projectID = projectID;
+    taskAttributes.rank = rank;
+
+    const task = Tasks.simpleSchema().clean(taskAttributes);
     const _id = Tasks.insert(task);
 
     return {
@@ -44,6 +41,8 @@ Meteor.methods({
   },
 
   "tasks.toggleDone": (taskID, done) => {
+      check(Meteor.userId(), String);
+
     check(taskID, String);
     check(done, Boolean);
 
@@ -53,6 +52,7 @@ Meteor.methods({
   },
 
   "tasks.deleteDone": (projectID) => {
+      check(Meteor.userId(), String);
     Tasks.remove({
       projectID,
       done: true
@@ -61,9 +61,8 @@ Meteor.methods({
     const tasks_rank_update = Tasks.find({
       projectID,
     }, {
-      fields: {
-        _id: 1
-      }
+      fields: { _id: 1 },
+      sort: { rank: 1 }
     }).fetch();
 
     let counter = 1;
@@ -74,6 +73,8 @@ Meteor.methods({
   },
 
   "tasks.moveToFirst": (oldRank) => {
+      check(Meteor.userId(), String);
+
     check(oldRank, Match.Integer);
 
     Tasks.update({
@@ -89,6 +90,8 @@ Meteor.methods({
   },
 
   "tasks.moveToLast": (oldRank) => {
+      check(Meteor.userId(), String);
+
     check(oldRank, Match.Integer);
 
     Tasks.update({
@@ -101,6 +104,8 @@ Meteor.methods({
   },
 
   "tasks.moveBetween": (start, end, inc) => {
+      check(Meteor.userId(), String);
+
     check(start, Match.Integer);
     check(end, Match.Integer);
     check(inc, Match.Integer);
@@ -118,6 +123,8 @@ Meteor.methods({
   },
 
   "tasks.updateRank": (taskId, newRank) => {
+      check(Meteor.userId(), String);
+
     check(taskId, String);
     check(newRank, Match.Integer);
 

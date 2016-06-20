@@ -43,5 +43,7 @@ Template.ProjectItem.events({
       el.removeClass('animated hinge');
       Meteor.call('projects.remove', projectID);
     }, 2000);
+
+    FlowRouter.go('projects');
   },
 });

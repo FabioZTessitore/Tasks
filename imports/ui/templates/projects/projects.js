@@ -8,12 +8,17 @@ import './project_item.js';
 import './projects.html';
 
 Template.ProjectsList.onCreated(function() {
-  this.autorun(() => {
-    this.subscribe('projects');
+    const self = this;
+    self.autorun(() => {
+        self.subscribe('projects');
   });
 });
 
 Template.ProjectsList.helpers({
+    Projects() {
+        return Projects;
+    },
+
   projects() {
     return Projects.find({}, { sort: { title: 1 } });
   },

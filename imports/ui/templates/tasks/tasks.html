@@ -1,26 +1,28 @@
 <template name="tasksList">
-  <section class="tasks">
+  <section class="tasks-list">
     <section class="heading">
       <h3><strong>{{projectTitle}}</strong>
       Tasks <button class="btn btn-warning delete_tasks_done"><span class="glyphicon glyphicon-trash"></span></button></h3>
     </section>
 
     <ul class="list-group">
-      <div id="tasks">
-        {{#if isOwner}}
-          {{#each tasks}}
-            {{> taskItem}}
-          {{/each}}
-        {{/if}}
-      </div>
+        <div id="tasks">
+            {{#if Template.subscriptionsReady}}
+                {{#if isOwner}}
+                    {{#each tasks}}
+                        {{> taskItem}}
+                    {{/each}}
+                {{/if}}
+            {{else}}
+                <p>Loading</p>
+            {{/if}}
+        </div>
 
-      <li class="list-group-item">
-        <form class="form-inline">
-          <div class="form-group">
-            <input type="text" class="form-control" id="newTask" name="newTask" placeholder="Add a Task">
-          </div>
-        </form>
-      </li>
+        {{#if currentUser}}
+        <li class="list-group-item">
+            {{> quickForm collection=Tasks id="taskInsertForm" buttonContent=false}}
+        </li>
+        {{/if}}
     </ul>
   </section>
 </template>

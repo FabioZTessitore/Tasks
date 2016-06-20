@@ -41,11 +41,11 @@ Template.register.events({
       instance.errorRegister.set('username', 'Username obbligatorio');
     if (userAttributes.username && userAttributes.username.length<3)
       instance.errorRegister.set('username', "Username deve contenere almeno tre caratteri");
-    if (!userAttributes.password1) 
+    if (!userAttributes.password1)
       instance.errorRegister.set('password1', 'Password obbligatoria');
-    if (!userAttributes.password2) 
+    if (!userAttributes.password2)
       instance.errorRegister.set('password2', 'Ripetizione Password obbligatoria');
-    if (userAttributes.password1!==userAttributes.password2) 
+    if (userAttributes.password1!==userAttributes.password2)
       instance.errorRegister.set('passwordMatch', 'Le password non coincidono');
 
     if (instance.errorRegister.get('username') ||
@@ -65,7 +65,7 @@ Template.register.events({
       }
 
       Meteor.loginWithPassword(userAttributes.username, userAttributes.password1);
-      FlowRouter.go('/');
+      FlowRouter.go('projects');
     });
   }
 });

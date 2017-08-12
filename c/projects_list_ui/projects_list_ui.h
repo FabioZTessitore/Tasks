@@ -15,7 +15,7 @@ struct projectsListWin {
 typedef struct projectsListWin ProjectsListWin;
 typedef struct projectsListWin *ProjectsListWinPtr;
 
-void projectListWin_make(ProjectsListWinPtr plw, unsigned int height, unsigned int width, unsigned int starty, unsigned int startx);
-void projectListWin_updateContent(ProjectsListWinPtr plw, ProjectsListPtr pl);
+void projectsListWin_make(ProjectsListWinPtr plw, unsigned int height, unsigned int width, unsigned int starty, unsigned int startx);
+void projectsListWin_updateContent(ProjectsListWinPtr plw, ProjectsListPtr pl);
 
 #endif

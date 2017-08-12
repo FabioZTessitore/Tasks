@@ -5,14 +5,12 @@
 #include "project.h"
 #include "projects_list.h"
 #include "projects_list_ui.h"
+#include "project_new_ui.h"
 
 int main()
 {
   ProjectsListWin plw;
-  int startx = 3;
-  int starty = 5;
-  int width = 30;
-  int height = 15;
+  ProjectNewWin pnw;
 
   Project p1, p2;
   project_make(&p1, 1, "Progetto 1");
@@ -32,7 +30,7 @@ int main()
   mvprintw(23, 5, "Press F2 to quit");
   refresh();
 
-  projectsListWin_make(&plw, height, width, starty, startx);
+  projectsListWin_make(&plw, 15, 30, 5, 3);
   projectsListWin_updateContent(&plw, &pl);
 
   int c;
@@ -40,6 +38,7 @@ int main()
     switch (c) {
       case 'I':
         mvprintw(10, 37, "Pressed I");
+        projectNewWin_make(&pnw, 10, 40, 10, 10);
         break;
       default:
         mvprintw(10, 37, "Ma che ...");

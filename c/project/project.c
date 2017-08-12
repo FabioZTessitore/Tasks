@@ -19,3 +19,12 @@ void project_dump(ProjectPtr p)
   printf("ID: %d\t", p->id);
   printf("Name: %s\n", p->name);
 }
+
+void project_toString(ProjectPtr p, char *buffer, int bufSize)
+{
+  char localBuffer[128];
+  sprintf(localBuffer, "%d) %s", p->id, p->name);
+
+  strncpy(buffer, localBuffer, bufSize);
+  buffer[bufSize-1] = '\0';
+}

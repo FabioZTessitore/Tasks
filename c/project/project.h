@@ -14,5 +14,6 @@ typedef struct project *ProjectPtr;
 void project_make(ProjectPtr p, unsigned int id, const char *name);
 void project_set_name(ProjectPtr p, const char *name);
 void project_dump(ProjectPtr p);
+void project_toString(ProjectPtr p, char *buffer, int bufSize);
 
 #endif

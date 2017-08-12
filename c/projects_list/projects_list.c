@@ -9,9 +9,11 @@ void projectsList_init(ProjectsListPtr pl)
 
 void projectsList_addProject(ProjectsListPtr pl, const ProjectPtr p)
 {
+  int last;
+
   if (pl->size >= PROJECTS_MAX) return;
 
-  int last = pl->size;
+  last = pl->size;
   pl->project[last] = p;
   pl->size++;
 }
@@ -33,9 +35,9 @@ void projectsList_dump(ProjectsListPtr pl)
 
 void projectsList_remove(ProjectsListPtr pl, const unsigned int index)
 {
-  if (index >= pl->size) return;
-
   int i;
+
+  if (index >= pl->size) return;
 
   for (i = index; i < pl->size - 1; i++) {
     pl->project[i] = pl->project[i+1];

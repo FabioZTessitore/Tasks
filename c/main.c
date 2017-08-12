@@ -1,34 +1,54 @@
-#include <stdio.h>
+#include <ncurses.h>
+
 #include "version.h"
-#include "config.h"
+
 #include "project.h"
 #include "projects_list.h"
+#include "projects_list_ui.h"
 
 int main()
 {
-  puts("TASKS");
+  ProjectsListWin plw;
+  int startx = 3;
+  int starty = 5;
+  int width = 30;
+  int height = 15;
 
-  printf("VERSION %s\n", VERSION);
-  printf("API %d\n", API);
-
-  printf("\n\nProject:\n");
-  Project test;
-  project_make(&test, 1, "TEST");
-  project_dump(&test);
-  project_set_name(&test, "test test");
-  project_dump(&test);
-
-  Project test2;
-  project_make(&test2, 2, "TEST2");
-
+  Project p1, p2;
+  project_make(&p1, 1, "Progetto 1");
+  project_make(&p2, 2, "Progetto 2 con un nome molto molto lungo");
   ProjectsList pl;
   projectsList_init(&pl);
-  projectsList_addProject(&pl, &test);
-  projectsList_addProject(&pl, &test2);
-  printf("\n\nProjectsList:\n");
-  projectsList_dump(&pl);
-  projectsList_remove(&pl, 0);
-  projectsList_dump(&pl);
+  projectsList_addProject(&pl, &p1);
+  projectsList_addProject(&pl, &p2);
+
+  initscr();
+  curs_set(0);
+  cbreak();
+  noecho();
+  keypad(stdscr, TRUE);
+
+  mvprintw(1, 5, "Tasks Manager");
+  mvprintw(23, 5, "Press F2 to quit");
+  refresh();
+
+  projectsListWin_make(&plw, height, width, starty, startx);
+  projectsListWin_updateContent(&plw, &pl);
+
+  int c;
+  while ( (c=getch()) != KEY_F(2) ) {
+    switch (c) {
+      case 'I':
+        mvprintw(10, 37, "Pressed I");
+        break;
+      default:
+        mvprintw(10, 37, "Ma che ...");
+        break;
+    }
+    refresh();
+  }
+
+  endwin();
 
   return 0;
 }

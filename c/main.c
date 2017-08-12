@@ -7,6 +7,8 @@
 #include "projects_list_ui.h"
 #include "project_new_ui.h"
 
+void update(ProjectsListWinPtr plw, ProjectsListPtr pl);
+
 int main()
 {
   ProjectsListWin plw;
@@ -29,27 +31,35 @@ int main()
   init_pair(1, COLOR_GREEN, COLOR_BLACK);
 	init_pair(2, COLOR_RED, COLOR_BLACK);
 
-  mvprintw(1, 5, "Tasks Manager");
-  mvprintw(23, 5, "Press F2 to quit");
+  clear();
   refresh();
-
-  projectsListWin_make(&plw, 15, 30, 5, 3);
-  projectsListWin_updateContent(&plw, &pl);
+  update(&plw, &pl);
 
   int c;
   while ( (c=getch()) != KEY_F(2) ) {
     switch (c) {
       case 'I':
-        projectNewWin_make(&pnw);
+        projectNewWin_make(&pnw, &pl);
         break;
       default:
         mvprintw(20, 37, "Ma che ...");
         break;
     }
+    clear();
     refresh();
+    update(&plw, &pl);
   }
 
   endwin();
 
   return 0;
+}
+
+void update(ProjectsListWinPtr plw, ProjectsListPtr pl)
+{
+  mvprintw(1, 5, "Tasks Manager");
+  mvprintw(23, 5, "Press F2 to quit");
+
+  projectsListWin_make(plw, 15, 30, 5, 3);
+  projectsListWin_updateContent(plw, pl);
 }

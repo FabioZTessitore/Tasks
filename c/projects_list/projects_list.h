@@ -17,5 +17,6 @@ void projectsList_init(ProjectsListPtr pl);
 void projectsList_addProject(ProjectsListPtr pl, const ProjectPtr p);
 void projectsList_dump(ProjectsListPtr pl);
 void projectsList_remove(ProjectsListPtr pl, const unsigned int index);
+void projectsList_free(ProjectsListPtr pl);
 
 #endif

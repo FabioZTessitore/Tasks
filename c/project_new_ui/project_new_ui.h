@@ -2,6 +2,7 @@
 #define PROJECT_NEW_UI_H
 
 #include <ncurses.h>
+#include "projects_list.h"
 
 struct projectNewWin {
   WINDOW *win;
@@ -14,6 +15,6 @@ struct projectNewWin {
 typedef struct projectNewWin ProjectNewWin;
 typedef struct projectNewWin *ProjectNewWinPtr;
 
-void projectNewWin_make(ProjectNewWinPtr pnw);
+void projectNewWin_make(ProjectNewWinPtr pnw, ProjectsListPtr pl);
 
 #endif

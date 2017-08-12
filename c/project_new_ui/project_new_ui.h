@@ -14,6 +14,6 @@ struct projectNewWin {
 typedef struct projectNewWin ProjectNewWin;
 typedef struct projectNewWin *ProjectNewWinPtr;
 
-void projectNewWin_make(ProjectNewWinPtr pnw, unsigned int height, unsigned int width, unsigned int starty, unsigned int startx);
+void projectNewWin_make(ProjectNewWinPtr pnw);
 
 #endif

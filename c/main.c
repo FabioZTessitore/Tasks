@@ -25,6 +25,9 @@ int main()
   cbreak();
   noecho();
   keypad(stdscr, TRUE);
+  start_color();
+  init_pair(1, COLOR_GREEN, COLOR_BLACK);
+	init_pair(2, COLOR_RED, COLOR_BLACK);
 
   mvprintw(1, 5, "Tasks Manager");
   mvprintw(23, 5, "Press F2 to quit");
@@ -37,11 +40,10 @@ int main()
   while ( (c=getch()) != KEY_F(2) ) {
     switch (c) {
       case 'I':
-        mvprintw(10, 37, "Pressed I");
-        projectNewWin_make(&pnw, 10, 40, 10, 10);
+        projectNewWin_make(&pnw);
         break;
       default:
-        mvprintw(10, 37, "Ma che ...");
+        mvprintw(20, 37, "Ma che ...");
         break;
     }
     refresh();

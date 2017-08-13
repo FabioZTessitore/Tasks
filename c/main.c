@@ -31,8 +31,6 @@ int main()
   init_pair(1, COLOR_GREEN, COLOR_BLACK);
 	init_pair(2, COLOR_RED, COLOR_BLACK);
 
-  clear();
-  refresh();
   update(&plw, &pl);
 
   int c;
@@ -45,10 +43,8 @@ int main()
         mvprintw(20, 37, "Ma che ...");
         break;
     }
-    clear();
-    refresh();
     update(&plw, &pl);
-  }
+}
 
   endwin();
 
@@ -57,8 +53,10 @@ int main()
 
 void update(ProjectsListWinPtr plw, ProjectsListPtr pl)
 {
+  clear();
   mvprintw(1, 5, "Tasks Manager");
   mvprintw(23, 5, "Press F2 to quit");
+  refresh();
 
   projectsListWin_make(plw, 15, 30, 5, 3);
   projectsListWin_updateContent(plw, pl);

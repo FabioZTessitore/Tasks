@@ -23,8 +23,7 @@ void projectNewWin_make(ProjectNewWinPtr pnw, ProjectsListPtr pl)
   wrefresh(pnw->win);
 
   doModal(pnw, pl);
-  box(pnw->win, ' ', ' ');
-  wrefresh(pnw->win);
+
   delwin(pnw->win);
 }
 
